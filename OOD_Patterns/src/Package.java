@@ -14,9 +14,11 @@ public class Package {
     private Strategy strategy;
     private float weight;
     private float cost;
+
     private Package() {
         // Private constructor to prevent instantiation
     }
+
     public static Package Instance() {
         return instance;
     }
@@ -33,17 +35,28 @@ public class Package {
         instance.weight = weight;
     }
 
+    public State getState() {
+        return instance.state;
+    }
+
+    public Strategy getStrategy() {
+        return instance.strategy;
+    }
+
+    public float getCost() {
+        if (instance.strategy == Strategy.normal)
+            return weight * 2.5f;
+        else
+            return weight * 3.5f;
+    }
+
     public void changeShippingStrategy(Strategy strategy) {
         this.strategy = strategy;
-        if (instance.strategy == Strategy.normal)
-            cost = weight * 2.5f;
-        else
-            cost = weight * 3.5f;
-        System.out.println(">>>>>Shippint cost: $%.1f", cost);
+        System.out.printf(">>>>>Shippint cost: $%.1f\n", getCost());
         printInfo();
     }
 
-    public void updatePackageState(Strategy state) {
+    public void updatePackageState(State state) {
         this.state = state;
         if (this.state == State.transition) {
             System.out.println("Package is in transit");

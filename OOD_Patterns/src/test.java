@@ -1,6 +1,3 @@
-package test;
-
-import Package.java;
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -8,14 +5,14 @@ import static org.junit.jupiter.api.Assertions.*;
 public class test {
     @Test
     public void testSingletonInstance() {
-        Package instance1 = Package.getInstance();
-        Package instance2 = Package.getInstance();
+        Package instance1 = Package.Instance();
+        Package instance2 = Package.Instance();
         assertSame(instance1, instance2);
     }
 
     @Test
     public void testChangeShippingStrategy() {
-        Package pkg = Package.getInstance();
+        Package pkg = Package.Instance();
         pkg.setWeight(10.0f);
 
         pkg.changeShippingStrategy(Strategy.normal);
@@ -27,7 +24,7 @@ public class test {
 
     @Test
     public void testUpdatePackageState() {
-        Package pkg = Package.getInstance();
+        Package pkg = Package.Instance();
         pkg.setState(State.transition);
         pkg.updatePackageState(State.transition);
         assertEquals(State.transition, pkg.getState());
