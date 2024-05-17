@@ -1,73 +1,34 @@
-enum Strategy {
-    normal,
-    express
-}
-
-enum State {
-    transition,
-    delivered
-}
-
 public class Package {
-    private static Package instance = new Package();
-    private State state;
-    private Strategy strategy;
+    private static Package instance;
     private float weight;
-    private float cost;
+    private InfoContext info;
+    private PackageStateContext state;
+    private ShippingContext strategy;
 
-    private Package() {
-        // Private constructor to prevent instantiation
-    }
-
-    public static Package Instance() {
-        return instance;
-    }
-
-    public void setState(State state) {
-        instance.state = state;
-    }
-
-    public void setStrategy(Strategy strategy) {
-        instance.strategy = strategy;
-    }
-
-    public void setWeight(float weight) {
+    public Package(float weight) {
         instance.weight = weight;
+        instance.info = new InfoContext();
+        instance.state = new PackageStateContext(new TransitionState());
+        instance.strategy = new ShippingContext();
     }
 
-    public State getState() {
-        return instance.state;
-    }
-
-    public Strategy getStrategy() {
-        return instance.strategy;
-    }
-
-    public float getCost() {
-        if (instance.strategy == Strategy.normal)
-            return weight * 2.5f;
-        else
-            return weight * 3.5f;
-    }
-
-    public void changeShippingStrategy(Strategy strategy) {
-        this.strategy = strategy;
-        System.out.printf(">>>>>Shippint cost: $%.1f\n", getCost());
-        printInfo();
-    }
-
-    public void updatePackageState(State state) {
-        this.state = state;
-        if (this.state == State.transition) {
-            System.out.println("Package is in transit");
-            printInfo();
+    public void changeStrategy(int strategy) {
+        if (strategy == 0) {
+            instance.strategy.setStrategy(new NormalShippingStrategy());
+            instance.info.setState(new NormalInfoState());
         } else {
-            System.out.println("Package has been delivered");
-            System.exit(0);
+            instance.strategy.setStrategy(new ExpressShippingStrategy());
+            instance.info.setState(new ExpressInfoState());
         }
+        instance.strategy.calculateCost(this.weight);
+        instance.info.request();
     }
 
-    public void printInfo() {
-        System.out.println("We are in " + instance.strategy + " speed! And state is in " + instance.state + ".");
+    public void updateState(int state) {
+        if (state == 0)
+            instance.state.setState(new TransitionState());
+        else
+            instance.state.setState(new DeliveredState());
+        instance.state.request();
     }
 }
