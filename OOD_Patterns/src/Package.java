@@ -15,24 +15,24 @@ public class Package {
     private PackageStateContext state;
     private ShippingContext strategy;
 
-    private Package(float weight) {
+    private Package(float weight, int strategy) {
         this.weight = weight;
         this.info = new InfoContext();
         this.state = new PackageStateContext(new TransitionState());
         this.strategy = new ShippingContext();
     }
 
-    public static Package init(float weight) {
+    public static Package init(float weight, int strategy) {
         if (instance != null) {
             instance.weight = weight;
         } else {
-            instance = new Package(weight);
+            instance = new Package(weight, strategy);
         }
         return instance;
     }
 
     public void changeStrategy(int strategy) {
-        if (strategy == 0) {
+        if (strategy == 1) {
             this.strategy.setStrategy(new NormalShippingStrategy());
             this.info.setState(new NormalInfoState());
         } else {
@@ -44,11 +44,12 @@ public class Package {
     }
 
     public void updateState(int state) {
-        if (state == 0)
+        if (state == 1)
             this.state.setState(new TransitionState());
         else
             this.state.setState(new DeliveredState());
         this.state.request();
+        this.info.request();
     }
 
     public static synchronized Package getInstance() {
