@@ -9,6 +9,11 @@ objects.
 
     **Behavioral Patterns**: Deal with dynamic interactions among societies of classes and objects.
 
+| Purpose | Patterns |
+| :-----: | :-----: |
+| Creational | Factory Method, Abstract Factory, Builder, Prototype, Singleton | 
+| Structural | Adapter (class), Adapter (object), Bridge, Composite, Decorator, Facade, Flyweight, Proxy|
+| Behavioral | Interpreter, Template Method, Chain of Resposibility, Command, Iterator, Mediator, Memento, Observer, State, Strategy, Visitor |
 
 2. Both **_State_** and **_Strategy_** are **Behavioral Patterns**:
 
