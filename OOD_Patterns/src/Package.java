@@ -9,11 +9,14 @@ enum State {
 }
 
 public class Package {
-    private Package instance;
+    private static Package instance = new Package();
     private State state;
     private Strategy strategy;
     private float weight;
-
+    private float cost;
+    private Package() {
+        // Private constructor to prevent instantiation
+    }
     public static Package Instance() {
         return instance;
     }
@@ -31,7 +34,7 @@ public class Package {
     }
 
     public void changeShippingStrategy(Strategy strategy) {
-        instance.strategy = strategy;
+        this.strategy = strategy;
         if (instance.strategy == Strategy.normal)
             cost = weight * 2.5f;
         else
@@ -41,8 +44,8 @@ public class Package {
     }
 
     public void updatePackageState(Strategy state) {
-        instance.state = state;
-        if (instance.state == State.transition) {
+        this.state = state;
+        if (this.state == State.transition) {
             System.out.println("Package is in transit");
             printInfo();
         } else {
