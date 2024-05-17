@@ -1,4 +1,4 @@
-package State;
+package State.Package;
 
 public class PackageStateContext {
     private PackageState state;

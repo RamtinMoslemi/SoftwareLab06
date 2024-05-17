@@ -1,5 +1,5 @@
 package Strategy;
 
 public interface ShippingStrategy {
-    double cost(float weight);
+    double getCost(float weight);
 }

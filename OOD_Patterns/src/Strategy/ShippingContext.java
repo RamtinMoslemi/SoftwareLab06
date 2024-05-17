@@ -8,6 +8,6 @@ public class ShippingContext {
     }
 
     public double calculateCost(float weight) {
-        return shippingStrategy.cost(weight);
+        return shippingStrategy.getCost(weight);
     }
 }

@@ -1,4 +1,4 @@
-package State;
+package State.Info;
 
 public class InfoContext {
     private InfoState state;
