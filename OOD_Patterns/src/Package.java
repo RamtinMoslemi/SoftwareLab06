@@ -18,19 +18,19 @@ public class Package {
         return instance;
     }
 
-    public void setState() {
-
+    public void setState(enum state) {
+        instance.state = state;
     }
 
-    public void setStrategy() {
-
+    public void setStrategy(enum strategy) {
+        instance.strategy = strategy;
     }
 
-    public void setWeight() {
-
+    public void setWeight(float weight) {
+        instance.weight = weight;
     }
 
-    public void changeShippingStrategy() {
+    public void changeShippingStrategy(enum strategy) {
 
     }
 
