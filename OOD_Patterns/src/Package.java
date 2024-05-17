@@ -4,7 +4,7 @@ enum Strategy {
 }
 
 enum State {
-    in_transit,
+    transition,
     delivered
 }
 
@@ -37,11 +37,12 @@ public class Package {
         else
             cost = weight * 3.5f;
         System.out.println(">>>>>Shippint cost: $%.1f", cost);
+        printInfo();
     }
 
     public void updatePackageState(Strategy state) {
         instance.state = state;
-        if (instance.state == State.in_transit) {
+        if (instance.state == State.transition) {
             System.out.println("Package is in transit");
             printInfo();
         } else {
@@ -50,11 +51,7 @@ public class Package {
         }
     }
 
-    public void onDeliver() {
-
-    }
-
     public void printInfo() {
-
+        System.out.println("We are in " + instance.strategy + " speed! And state is in " + instance.state + ".");
     }
 }
