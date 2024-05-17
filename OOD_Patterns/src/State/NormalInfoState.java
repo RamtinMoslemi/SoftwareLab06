@@ -1,3 +1,5 @@
+package State;
+
 public class NormalInfoState implements InfoState {
     @Override
     public void handleRequest() {

@@ -1,34 +1,56 @@
+import State.*;
+import Strategy.ExpressShippingStrategy;
+import Strategy.NormalShippingStrategy;
+import Strategy.ShippingContext;
+
 public class Package {
-    private static Package instance;
+    private static Package instance = null;
     private float weight;
     private InfoContext info;
     private PackageStateContext state;
     private ShippingContext strategy;
 
-    public Package(float weight) {
-        instance.weight = weight;
-        instance.info = new InfoContext();
-        instance.state = new PackageStateContext(new TransitionState());
-        instance.strategy = new ShippingContext();
+    private Package(float weight) {
+        this.weight = weight;
+        this.info = new InfoContext();
+        this.state = new PackageStateContext(new TransitionState());
+        this.strategy = new ShippingContext();
+    }
+
+    public static Package init(float weight) {
+        if (instance != null) {
+            instance.weight = weight;
+        } else {
+            instance = new Package(weight);
+        }
+        return instance;
     }
 
     public void changeStrategy(int strategy) {
         if (strategy == 0) {
-            instance.strategy.setStrategy(new NormalShippingStrategy());
-            instance.info.setState(new NormalInfoState());
+            this.strategy.setStrategy(new NormalShippingStrategy());
+            this.info.setState(new NormalInfoState());
         } else {
-            instance.strategy.setStrategy(new ExpressShippingStrategy());
-            instance.info.setState(new ExpressInfoState());
+            this.strategy.setStrategy(new ExpressShippingStrategy());
+            this.info.setState(new ExpressInfoState());
         }
-        instance.strategy.calculateCost(this.weight);
-        instance.info.request();
+        this.strategy.calculateCost(this.weight);
+        this.info.request();
     }
 
     public void updateState(int state) {
         if (state == 0)
-            instance.state.setState(new TransitionState());
+            this.state.setState(new TransitionState());
         else
-            instance.state.setState(new DeliveredState());
-        instance.state.request();
+            this.state.setState(new DeliveredState());
+        this.state.request();
+    }
+
+    public static synchronized Package getInstance() {
+        return instance;
+    }
+
+    public double getCost() {
+        return this.strategy.calculateCost(this.weight);
     }
 }

@@ -1,3 +1,5 @@
+package Strategy;
+
 public class ShippingContext {
     private ShippingStrategy shippingStrategy;
 
@@ -5,7 +7,7 @@ public class ShippingContext {
         this.shippingStrategy = shippingStrategy;
     }
 
-    public void calculateCost(float weight) {
-        shippingStrategy.cost(weight);
+    public double calculateCost(float weight) {
+        return shippingStrategy.cost(weight);
     }
 }

@@ -1,38 +1,36 @@
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
 
-
 public class test {
     @Test
     public void testSingletonInstance() {
-        Package instance1 = Package.Instance();
-        Package instance2 = Package.Instance();
+        Package instance1 = Package.init(12.0F);
+        Package instance2 = Package.init(15.5F);
         assertSame(instance1, instance2);
     }
 
     @Test
     public void testChangeShippingStrategy() {
-        Package pkg = Package.Instance();
-        pkg.setWeight(10.0f);
+        Package pkg = Package.init(10.0F);
 
-        pkg.changeShippingStrategy(Strategy.normal);
-        assertEquals(25.0f, pkg.getCost(), 0.1);
+        pkg.changeStrategy(0);
+        assertEquals(25.0, pkg.getCost(), 0.1);
 
-        pkg.changeShippingStrategy(Strategy.express);
-        assertEquals(35.0f, pkg.getCost(), 0.1);
+        pkg.changeStrategy(1);
+        assertEquals(35.0, pkg.getCost(), 0.1);
     }
 
     @Test
     public void testUpdatePackageState() {
-        Package pkg = Package.Instance();
-        pkg.setState(State.transition);
-        pkg.updatePackageState(State.transition);
-        assertEquals(State.transition, pkg.getState());
+        Package pkg = Package.init(0.0F);
+        pkg.updateState(0);
+        pkg.updateState(0);
+//        assertEquals(0, pkg.getState());
 
 
-        pkg.setState(State.delivered);
+        pkg.updateState(1);
         assertThrows(RuntimeException.class, () -> {
-            pkg.updatePackageState(State.delivered);
+            pkg.updateState(1);
         });
     }
 

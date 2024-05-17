@@ -1,3 +1,5 @@
+package State;
+
 public class ExpressInfoState implements InfoState {
     @Override
     public void handleRequest() {

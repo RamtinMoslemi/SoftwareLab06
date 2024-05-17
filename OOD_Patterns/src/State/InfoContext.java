@@ -1,3 +1,5 @@
+package State;
+
 public class InfoContext {
     private InfoState state;
 
