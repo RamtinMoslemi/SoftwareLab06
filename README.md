@@ -1,5 +1,17 @@
 # SoftwareLab06
 
+## Details 
+
+We implement the state of the package using the **_State Pattern_**. To make this happen we make an interface with abstract methods and concrete classes that implement this interface such as `in-transit` and `delivered`. To manage this new structure, we also use a context class and use it for setting different states. An example of how we implement these classes is as follows:
+![image](https://github.com/RamtinMoslemi/SoftwareLab06/assets/76493699/3abe6d99-c4d5-4894-b5bb-f424b6c83bed)
+[source](https://www.geeksforgeeks.org/state-design-pattern/)
+
+To implement the **_Strategy Pattern_** for `Standard` and `Express` means of delivery (shipping), we use another interface with abstract classes that are implemented for each of the means of delivery. These different strategies of shipping can be used through the contex class. An example of how we implement these classes is as follows:
+![image](https://github.com/RamtinMoslemi/SoftwareLab06/assets/76493699/182727e3-091d-4f8c-8558-af4067917b45)
+![image](https://github.com/RamtinMoslemi/SoftwareLab06/assets/76493699/83b10f5e-b726-4cfe-9ca0-18b988da8eff)
+[source](https://www.geeksforgeeks.org/strategy-pattern-set-1/)
+
+## Questions
 1. GoF Patterns can be divided into three separate categories:
 
     **Creational Patterns**: Deal with initializing and configuring classes and objects. Creational design patterns abstract the instantiation process. They help make a system independent of how its objects are created, composed, and represented. A class creational pattern uses inheritance to vary the class that's instantiated, whereas an object creational pattern will delegate instantiation to another object.
