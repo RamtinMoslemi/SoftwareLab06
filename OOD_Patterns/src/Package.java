@@ -1,6 +1,6 @@
 enum Strategy {
-    Standard,
-    Express
+    normal,
+    express
 }
 
 enum State {
@@ -18,11 +18,11 @@ public class Package {
         return instance;
     }
 
-    public void setState(enum state) {
+    public void setState(State state) {
         instance.state = state;
     }
 
-    public void setStrategy(enum strategy) {
+    public void setStrategy(Strategy strategy) {
         instance.strategy = strategy;
     }
 
@@ -30,11 +30,16 @@ public class Package {
         instance.weight = weight;
     }
 
-    public void changeShippingStrategy(enum strategy) {
-
+    public void changeShippingStrategy(Strategy strategy) {
+        instance.strategy = strategy;
+        if (strategy == Strategy.normal)
+            cost = weight * 2.5f;
+        else
+            cost = weight * 3.5f;
+        System.out.println(">>>>>Shippint cost: $%.1f", cost);
     }
 
-    public void updatePackageState() {
+    public void updatePackageState(Strategy state) {
 
     }
 
